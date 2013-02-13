@@ -8,6 +8,10 @@ module Recommendable
     def recommendable?() self.class.recommendable? end
 
     module ClassMethods
+      def make_similarity!
+        puts "making #{self.name} similarity"
+        Recommendable.configure { |config| config.similarity_classes << self }
+      end
       def make_recommendable!
         Recommendable.configure { |config| config.ratable_classes << self }
 

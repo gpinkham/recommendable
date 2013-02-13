@@ -13,7 +13,7 @@ module Recommendable
         # @note Similarity values are asymmetrical. `Calculations.similarity_between(user_id, other_user_id)` will not necessarily equal `Calculations.similarity_between(other_user_id, user_id)`
         def similarity_between(user_id, other_user_id)
           similarity = liked_count = disliked_count = 0
-          in_common = Recommendable.config.ratable_classes.each do |klass|
+          in_common = Recommendable.config.similarity_classes.each do |klass|
             liked_set = Recommendable::Helpers::RedisKeyMapper.liked_set_for(klass, user_id)
             other_liked_set = Recommendable::Helpers::RedisKeyMapper.liked_set_for(klass, other_user_id)
             disliked_set = Recommendable::Helpers::RedisKeyMapper.disliked_set_for(klass, user_id)
@@ -42,7 +42,7 @@ module Recommendable
 
           # Only calculate similarities for users who have rated the items that
           # this user has rated
-          relevant_user_ids = Recommendable.config.ratable_classes.inject([]) do |memo, klass|
+          relevant_user_ids = Recommendable.config.similarity_classes.inject([]) do |memo, klass|
             liked_set = Recommendable::Helpers::RedisKeyMapper.liked_set_for(klass, user_id)
             disliked_set = Recommendable::Helpers::RedisKeyMapper.disliked_set_for(klass, user_id)
 

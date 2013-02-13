@@ -23,16 +23,17 @@ module Recommendable
     # neighbors as opposed to a subset of the nearest ones.
     attr_accessor :nearest_neighbors
 
-    attr_accessor :ratable_classes, :user_class
+    attr_accessor :ratable_classes, :user_class, :similarity_classes
 
     # Default values
     def initialize
-      @redis             = Redis.new
-      @redis_namespace   = :recommendable
-      @auto_enqueue      = true
-      @queue_name        = :recommendable
-      @ratable_classes   = []
-      @nearest_neighbors = nil
+      @redis              = Redis.new
+      @redis_namespace    = :recommendable
+      @auto_enqueue       = true
+      @queue_name         = :recommendable
+      @ratable_classes    = []
+      @similarity_classes = []
+      @nearest_neighbors  = nil
     end
   end
 

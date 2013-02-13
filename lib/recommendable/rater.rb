@@ -16,7 +16,16 @@ module Recommendable
           config.user_class      = self
         end
 
-        things.each { |thing| thing.to_s.classify.constantize.make_recommendable! }
+        puts "things: #{things}"
+
+        things.each { |thing|
+          puts "thing: #{thing}"
+          thing.each { |key, value|
+            puts "key-value: #{key}-#{value}"
+            key.to_s.classify.constantize.make_recommendable!
+            key.to_s.classify.constantize.make_similarity! if value == :determines_similarity
+          }
+        }
 
         class_eval do
           include Liker
