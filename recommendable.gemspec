@@ -22,6 +22,7 @@ EOF
   s.add_dependency 'hooks',         '>= 0.2.1'
 
   s.add_development_dependency 'minitest'
+  s.add_development_dependency 'minitest-reporters', '>= 0.5.0'
   s.add_development_dependency 'miniskirt'
   s.add_development_dependency 'yard'
   s.add_development_dependency 'rails', '>= 3.1.0'
